@@ -1,28 +1,36 @@
-// 1. 커스텀 커서 설정 (기존과 동일)
+/* =========================================
+   1. CUSTOM CURSOR & HOVER EFFECTS
+   ========================================= */
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorCircle = document.querySelector('.cursor-circle');
 
-window.addEventListener('mousemove', (e) => {
-    cursorDot.style.left = `${e.clientX}px`;
-    cursorDot.style.top = `${e.clientY}px`;
-    
-    cursorCircle.animate({
-        left: `${e.clientX}px`,
-        top: `${e.clientY}px`
-    }, { duration: 500, fill: "forwards" });
-});
+// 커서 이동
+if (cursorDot && cursorCircle) {
+    window.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        
+        cursorCircle.animate({
+            left: `${e.clientX}px`,
+            top: `${e.clientY}px`
+        }, { duration: 500, fill: "forwards" });
+    });
+}
 
+// 호버 효과 (커서 커짐)
 document.querySelectorAll('.hover-effect').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
 
 
-// 2. 인트로 비눗방울 애니메이션 및 랜덤 가사 (index.html에서만 실행)
+/* =========================================
+   2. INTRO BUBBLES & LYRICS (Index Only)
+   ========================================= */
 const canvas = document.getElementById('bubbleCanvas');
 const introQuoteText = document.getElementById('intro-quote-text');
 
-if (canvas && introQuoteText) { // 캔버스와 가사 요소가 모두 있을 때만 실행
+if (canvas && introQuoteText) { 
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -38,7 +46,6 @@ if (canvas && introQuoteText) { // 캔버스와 가사 요소가 모두 있을 �
             this.directionX = (Math.random() * .4) - .2;
             this.directionY = (Math.random() * 2) + 1;
             this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.originalColor = this.color; // 초기 색상 저장
         }
         draw() {
             ctx.beginPath();
@@ -88,9 +95,7 @@ if (canvas && introQuoteText) { // 캔버스와 가사 요소가 모두 있을 �
         bubblesArray.forEach((bubble, index) => {
             const dist = Math.hypot(mouseX - bubble.x, mouseY - bubble.y);
             if (dist - bubble.radius < 1) {
-                // 터지는 애니메이션 (예시: 사라지기)
                 bubblesArray.splice(index, 1);
-                // 새로운 비눗방울 추가
                 bubblesArray.push(new Bubble()); 
             }
         });
@@ -105,41 +110,25 @@ if (canvas && introQuoteText) { // 캔버스와 가사 요소가 모두 있을 �
         "Dancing on the moon, I'm floating.",
         "I'm a piece of art.",
         "Face card never declines, my God.",
-        "You can look, but don't touch.",
-        "Always original, never a copy.",
-        "Don't you treat me like a regular.",
-        "You missed the chance to be my favorite.",
-        "Dare you to forget we were ever almost there.",
-        "You were my priority, now I'm a memory.",
-        "I run away from love 'cause I'm scared.",
-        "I need something safer.",
-        "You never gave us a chance to last.",
-        "Open up your heart, come take a seat.",
-        "I just wanna feel you on my body.",
-        "Got me wishing for more.",
-        "In the middle of the night, you're the light.",
         "Put her in chanel"
     ];
 
     let currentIntroQuoteIndex = 0;
 
     function displayNextIntroQuote() {
-        introQuoteText.style.opacity = '0'; // 페이드 아웃 시작
+        introQuoteText.style.opacity = '0'; 
         setTimeout(() => {
             currentIntroQuoteIndex = (currentIntroQuoteIndex + 1) % introQuotes.length;
             introQuoteText.innerText = introQuotes[currentIntroQuoteIndex];
-            introQuoteText.style.opacity = '1'; // 페이드 인 시작
-        }, 1000); // 1초 후에 텍스트 변경 및 페이드 인
+            introQuoteText.style.opacity = '1'; 
+        }, 1000); 
     }
 
-    // 초기 가사 표시
     introQuoteText.innerText = introQuotes[currentIntroQuoteIndex];
-    introQuoteText.style.opacity = '1'; // 처음엔 바로 보이도록
+    introQuoteText.style.opacity = '1'; 
+    setInterval(displayNextIntroQuote, 10000); 
 
-    // 10초마다 가사 변경 (CSS 애니메이션과 동기화)
-    setInterval(displayNextIntroQuote, 10000); // 10초 = CSS @keyframes의 총 시간
-
-    // 스페이스 바 이벤트 (메인 화면 진입)
+    // 스페이스 바 이벤트
     window.addEventListener('keydown', (e) => {
         if (e.code === 'Space') {
             const intro = document.getElementById('intro-canvas-layer');
@@ -155,7 +144,9 @@ if (canvas && introQuoteText) { // 캔버스와 가사 요소가 모두 있을 �
 }
 
 
-// 3. 유튜브 IFrame API (LP 플레이어) (기존과 동일)
+/* =========================================
+   3. YOUTUBE PLAYER (LP SECTION)
+   ========================================= */
 if (document.getElementById('youtube-player')) {
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -172,11 +163,8 @@ if (document.getElementById('youtube-player')) {
             width: '100%',
             videoId: currentVideoId,
             playerVars: {
-                'autoplay': 0,
-                'controls': 1,
-                'rel': 0,
-                'playsinline': 1,
-                'origin': window.location.origin
+                'autoplay': 0, 'controls': 1, 'rel': 0,
+                'playsinline': 1, 'origin': window.location.origin
             },
             events: {
                 'onReady': onPlayerReady,
@@ -185,9 +173,7 @@ if (document.getElementById('youtube-player')) {
         });
     };
 
-    function onPlayerReady(event) {
-        updateTitle();
-    }
+    function onPlayerReady(event) { updateTitle(); }
 
     const playerSection = document.querySelector('.player-section');
     const titleText = document.getElementById('track-title');
@@ -196,18 +182,18 @@ if (document.getElementById('youtube-player')) {
     function onPlayerStateChange(event) {
         if (event.data === YT.PlayerState.PLAYING) {
             playerSection.classList.add('playing');
-            playBtn.innerText = "일시정지";
+            if(playBtn) playBtn.innerText = "일시정지";
             updateTitle();
         } else if (event.data === YT.PlayerState.PAUSED) {
             playerSection.classList.remove('playing');
-            playBtn.innerText = "재생";
+            if(playBtn) playBtn.innerText = "재생";
         } else if (event.data === YT.PlayerState.ENDED) {
             playNextTrack();
         }
     }
 
     function updateTitle() {
-        if (player && player.getVideoData) {
+        if (player && player.getVideoData && titleText) {
             titleText.innerText = player.getVideoData().title;
         }
     }
@@ -219,17 +205,22 @@ if (document.getElementById('youtube-player')) {
         player.loadVideoById(currentVideoId);
     }
 
-    playBtn.addEventListener('click', () => {
-        const state = player.getPlayerState();
-        if (state === 1) player.pauseVideo();
-        else player.playVideo();
-    });
+    if(playBtn) {
+        playBtn.addEventListener('click', () => {
+            const state = player.getPlayerState();
+            if (state === 1) player.pauseVideo();
+            else player.playVideo();
+        });
+    }
 
-    document.getElementById('next-track-btn').addEventListener('click', playNextTrack);
+    const nextBtn = document.getElementById('next-track-btn');
+    if(nextBtn) nextBtn.addEventListener('click', playNextTrack);
 }
 
 
-// 4. 메인 페이지 QUOTE GENERATOR SCRIPT (기존과 동일)
+/* =========================================
+   4. QUOTE GENERATOR
+   ========================================= */
 const quotes = [
     { text: "Make me sweat, make me hotter", source: "Water" },
     { text: "I'm the girl next door, but I'm not innocent", source: "Girl Next Door" },
@@ -244,7 +235,7 @@ const quoteText = document.getElementById('quote-text');
 const quoteSource = document.getElementById('quote-source');
 const shuffleBtn = document.getElementById('shuffle-btn');
 
-if (shuffleBtn) {
+if (shuffleBtn && quoteText && quoteSource) {
     shuffleBtn.addEventListener('click', () => {
         quoteText.classList.add('fade-out');
         quoteSource.classList.add('fade-out');
@@ -258,387 +249,120 @@ if (shuffleBtn) {
         }, 500);
     });
 }
-/* =========================================
-   [THE SAND OF TIME - COUNTDOWN SCRIPT]
-   ========================================= */
 
+
+/* =========================================
+   5. COUNTDOWN TIMER
+   ========================================= */
 function updateCountdown() {
+    const daysEl = document.getElementById('days');
+    // 화면에 카운트다운 요소가 없으면 실행하지 않음 (오류 방지)
+    if (!daysEl) return;
+
     const now = new Date();
     const currentYear = now.getFullYear();
-    
-    // 타일라 생일: 1월 30일 (월은 0부터 시작하므로 0 = 1월)
-    let birthday = new Date(currentYear, 0, 30);
+    let birthday = new Date(currentYear, 0, 30); // 1월 30일
 
-    // 만약 올해 생일이 이미 지났다면, 내년 생일로 설정
     if (now > birthday) {
         birthday = new Date(currentYear + 1, 0, 30);
     }
 
     const diff = birthday - now;
 
-    // 시간 계산
     const d = Math.floor(diff / 1000 / 60 / 60 / 24);
     const h = Math.floor((diff / 1000 / 60 / 60) % 24);
     const m = Math.floor((diff / 1000 / 60) % 60);
     const s = Math.floor((diff / 1000) % 60);
 
-    // HTML 요소가 있을 때만 실행
-    const daysEl = document.getElementById('days');
-    if (daysEl) {
-        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-    }
+    document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+    document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+    document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+    document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
 }
 
-// 1초마다 업데이트
+// 1초마다 실행
 setInterval(updateCountdown, 1000);
-updateCountdown(); // 로드 되자마자 즉시 실행
+// 로드 시 즉시 실행
+window.addEventListener('load', updateCountdown);
+
+
 /* =========================================
-   [WATER RIPPLE EFFECT SCRIPT]
+   6. WATER RIPPLE EFFECT
    ========================================= */
 document.addEventListener('click', function(e) {
     // 1. 물결 요소 생성
     const ripple = document.createElement('div');
     ripple.classList.add('ripple');
     
-    // 2. 크기 설정 (랜덤하게)
-    const size = Math.random() * 50 + 50; // 50px ~ 100px
+    // 2. 크기 설정 (랜덤)
+    const size = Math.random() * 50 + 50; 
     ripple.style.width = `${size}px`;
     ripple.style.height = `${size}px`;
     
-    // 3. 위치 설정 (마우스 클릭 지점 중심)
+    // 3. 위치 설정
     ripple.style.left = `${e.clientX - size/2}px`;
     ripple.style.top = `${e.clientY - size/2}px`;
     
-    // 4. 화면에 추가
+    // 4. 추가
     document.body.appendChild(ripple);
     
-    // 5. 애니메이션 끝나면 삭제 (메모리 관리)
+    // 5. 삭제
     setTimeout(() => {
         ripple.remove();
-    }, 800); // CSS 애니메이션 시간과 동일하게
+    }, 800);
 });
-// 1. 커스텀 커서 설정 (기존과 동일)
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorCircle = document.querySelector('.cursor-circle');
-
-window.addEventListener('mousemove', (e) => {
-    cursorDot.style.left = `${e.clientX}px`;
-    cursorDot.style.top = `${e.clientY}px`;
-    
-    cursorCircle.animate({
-        left: `${e.clientX}px`,
-        top: `${e.clientY}px`
-    }, { duration: 500, fill: "forwards" });
-});
-
-document.querySelectorAll('.hover-effect').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-});
-
-
-// 2. 인트로 비눗방울 애니메이션 및 랜덤 가사 (index.html에서만 실행)
-const canvas = document.getElementById('bubbleCanvas');
-const introQuoteText = document.getElementById('intro-quote-text');
-
-if (canvas && introQuoteText) { // 캔버스와 가사 요소가 모두 있을 때만 실행
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let bubblesArray = [];
-    const colors = ['rgba(207, 170, 101, 0.4)', 'rgba(235, 220, 178, 0.3)', 'rgba(255, 255, 255, 0.2)'];
-
-    class Bubble {
-        constructor() {
-            this.radius = Math.random() * 20 + 5;
-            this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
-            this.y = canvas.height + this.radius;
-            this.directionX = (Math.random() * .4) - .2;
-            this.directionY = (Math.random() * 2) + 1;
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.originalColor = this.color; // 초기 색상 저장
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(207, 170, 101, 0.8)';
-            ctx.stroke();
-            ctx.closePath();
-        }
-        update() {
-            this.y -= this.directionY;
-            this.x += this.directionX;
-            if (this.y < 0 - this.radius) {
-                this.y = canvas.height + this.radius;
-                this.x = Math.random() * canvas.width;
-            }
-            this.draw();
-        }
-    }
-
-    function initBubbles() {
-        bubblesArray = [];
-        for (let i = 0; i < 60; i++) {
-            bubblesArray.push(new Bubble());
-        }
-    }
-
-    function animateBubbles() {
-        requestAnimationFrame(animateBubbles);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        bubblesArray.forEach(bubble => bubble.update());
-    }
-
-    initBubbles();
-    animateBubbles();
-
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        initBubbles();
-    });
-
-    canvas.addEventListener('click', (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        bubblesArray.forEach((bubble, index) => {
-            const dist = Math.hypot(mouseX - bubble.x, mouseY - bubble.y);
-            if (dist - bubble.radius < 1) {
-                // 터지는 애니메이션 (예시: 사라지기)
-                bubblesArray.splice(index, 1);
-                // 새로운 비눗방울 추가
-                bubblesArray.push(new Bubble()); 
-            }
-        });
-    });
-
-    // 인트로 가사 리스트
-    const introQuotes = [
-        "Make me lose my breath, make me water.",
-        "Deeper than the ocean, so you can't see the bottom.",
-        "Can we play truth or dare?",
-        "Giving me butterflies, got me flying high.",
-        "Dancing on the moon, I'm floating.",
-        "I'm a piece of art.",
-        "Face card never declines, my God.",
-        "You can look, but don't touch.",
-        "Always original, never a copy.",
-        "Don't you treat me like a regular.",
-        "You missed the chance to be my favorite.",
-        "Dare you to forget we were ever almost there.",
-        "You were my priority, now I'm a memory.",
-        "I run away from love 'cause I'm scared.",
-        "I need something safer.",
-        "You never gave us a chance to last.",
-        "Open up your heart, come take a seat.",
-        "I just wanna feel you on my body.",
-        "Got me wishing for more.",
-        "In the middle of the night, you're the light.",
-        "Put her in chanel"
-    ];
-
-    let currentIntroQuoteIndex = 0;
-
-    function displayNextIntroQuote() {
-        introQuoteText.style.opacity = '0'; // 페이드 아웃 시작
-        setTimeout(() => {
-            currentIntroQuoteIndex = (currentIntroQuoteIndex + 1) % introQuotes.length;
-            introQuoteText.innerText = introQuotes[currentIntroQuoteIndex];
-            introQuoteText.style.opacity = '1'; // 페이드 인 시작
-        }, 1000); // 1초 후에 텍스트 변경 및 페이드 인
-    }
-
-    // 초기 가사 표시
-    introQuoteText.innerText = introQuotes[currentIntroQuoteIndex];
-    introQuoteText.style.opacity = '1'; // 처음엔 바로 보이도록
-
-    // 10초마다 가사 변경 (CSS 애니메이션과 동기화)
-    setInterval(displayNextIntroQuote, 10000); // 10초 = CSS @keyframes의 총 시간
-
-    // 스페이스 바 이벤트 (메인 화면 진입)
-    window.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') {
-            const intro = document.getElementById('intro-canvas-layer');
-            const main = document.getElementById('main-content');
-            
-            if (intro && main && !intro.classList.contains('fade-out')) {
-                intro.classList.add('fade-out');
-                main.classList.remove('hidden');
-                setTimeout(() => main.classList.add('visible'), 100);
-            }
-        }
-    });
-}
-
-
-// 3. 유튜브 IFrame API (LP 플레이어) (기존과 동일)
-if (document.getElementById('youtube-player')) {
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    let player;
-    const videoIds = ['mGyN2NMuS4A', 'xiZUf98A1Ts', 'uLK2r3sG4lE', 'n3s6lDf8Nq0', 'XoiOOiuH8iI'];
-    let currentVideoId = videoIds[Math.floor(Math.random() * videoIds.length)];
-
-    window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player('youtube-player', {
-            height: '100%',
-            width: '100%',
-            videoId: currentVideoId,
-            playerVars: {
-                'autoplay': 0,
-                'controls': 1,
-                'rel': 0,
-                'playsinline': 1,
-                'origin': window.location.origin
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    };
-
-    function onPlayerReady(event) {
-        updateTitle();
-    }
-
-    const playerSection = document.querySelector('.player-section');
-    const titleText = document.getElementById('track-title');
-    const playBtn = document.getElementById('play-pause-btn');
-
-    function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.PLAYING) {
-            playerSection.classList.add('playing');
-            playBtn.innerText = "일시정지";
-            updateTitle();
-        } else if (event.data === YT.PlayerState.PAUSED) {
-            playerSection.classList.remove('playing');
-            playBtn.innerText = "재생";
-        } else if (event.data === YT.PlayerState.ENDED) {
-            playNextTrack();
-        }
-    }
-
-    function updateTitle() {
-        if (player && player.getVideoData) {
-            titleText.innerText = player.getVideoData().title;
-        }
-    }
-
-    function playNextTrack() {
-        let newId = videoIds[Math.floor(Math.random() * videoIds.length)];
-        while(newId === currentVideoId) newId = videoIds[Math.floor(Math.random() * videoIds.length)];
-        currentVideoId = newId;
-        player.loadVideoById(currentVideoId);
-    }
-
-    playBtn.addEventListener('click', () => {
-        const state = player.getPlayerState();
-        if (state === 1) player.pauseVideo();
-        else player.playVideo();
-    });
-
-    document.getElementById('next-track-btn').addEventListener('click', playNextTrack);
-}
-
-
-// 4. 메인 페이지 QUOTE GENERATOR SCRIPT (기존과 동일)
-const quotes = [
-    { text: "Make me sweat, make me hotter", source: "Water" },
-    { text: "I'm the girl next door, but I'm not innocent", source: "Girl Next Door" },
-    { text: "Johannesburg to the World", source: "Tyla" },
-    { text: "Always been the one, been the muse", source: "Truth or Dare" },
-    { text: "African music is going to take over", source: "Interview" },
-    { text: "I just want to be a global star", source: "Tyla" },
-    { text: "Can't get enough, I need more", source: "Safer" }
-];
-
-const quoteText = document.getElementById('quote-text');
-const quoteSource = document.getElementById('quote-source');
-const shuffleBtn = document.getElementById('shuffle-btn');
-
-if (shuffleBtn) {
-    shuffleBtn.addEventListener('click', () => {
-        quoteText.classList.add('fade-out');
-        quoteSource.classList.add('fade-out');
-
-        setTimeout(() => {
-            const random = Math.floor(Math.random() * quotes.length);
-            quoteText.innerText = quotes[random].text;
-            quoteSource.innerText = "- " + quotes[random].source + " -";
-            quoteText.classList.remove('fade-out');
-            quoteSource.classList.remove('fade-out');
-        }, 500);
-    });
-}
 /* =========================================
-   [THE SAND OF TIME - COUNTDOWN SCRIPT]
+   [ADDITIONAL FEATURES SCRIPT]
    ========================================= */
 
-function updateCountdown() {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    
-    // 타일라 생일: 1월 30일 (월은 0부터 시작하므로 0 = 1월)
-    let birthday = new Date(currentYear, 0, 30);
+// 1. Golden Dust (금가루 생성)
+function createGoldenDust() {
+    const dustCount = 30; // 먼지 개수 (너무 많으면 렉 걸림)
+    const container = document.body;
 
-    // 만약 올해 생일이 이미 지났다면, 내년 생일로 설정
-    if (now > birthday) {
-        birthday = new Date(currentYear + 1, 0, 30);
-    }
-
-    const diff = birthday - now;
-
-    // 시간 계산
-    const d = Math.floor(diff / 1000 / 60 / 60 / 24);
-    const h = Math.floor((diff / 1000 / 60 / 60) % 24);
-    const m = Math.floor((diff / 1000 / 60) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    // HTML 요소가 있을 때만 실행
-    const daysEl = document.getElementById('days');
-    if (daysEl) {
-        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+    for (let i = 0; i < dustCount; i++) {
+        const dust = document.createElement('div');
+        dust.classList.add('gold-dust');
+        
+        // 랜덤 위치 및 속도 설정
+        dust.style.left = Math.random() * 100 + 'vw';
+        dust.style.animationDuration = (Math.random() * 10 + 10) + 's'; // 10~20초 천천히
+        dust.style.animationDelay = (Math.random() * 10) + 's'; // 랜덤 딜레이
+        
+        container.appendChild(dust);
     }
 }
 
-// 1초마다 업데이트
-setInterval(updateCountdown, 1000);
-updateCountdown(); // 로드 되자마자 즉시 실행
-/* =========================================
-   [WATER RIPPLE EFFECT SCRIPT]
-   ========================================= */
-document.addEventListener('click', function(e) {
-    // 1. 물결 요소 생성
-    const ripple = document.createElement('div');
-    ripple.classList.add('ripple');
-    
-    // 2. 크기 설정 (랜덤하게)
-    const size = Math.random() * 50 + 50; // 50px ~ 100px
-    ripple.style.width = `${size}px`;
-    ripple.style.height = `${size}px`;
-    
-    // 3. 위치 설정 (마우스 클릭 지점 중심)
-    ripple.style.left = `${e.clientX - size/2}px`;
-    ripple.style.top = `${e.clientY - size/2}px`;
-    
-    // 4. 화면에 추가
-    document.body.appendChild(ripple);
-    
-    // 5. 애니메이션 끝나면 삭제 (메모리 관리)
-    setTimeout(() => {
-        ripple.remove();
-    }, 800); // CSS 애니메이션 시간과 동일하게
+// 2. Magnetic Buttons (자석 효과)
+function initMagneticButtons() {
+    // 자석 효과를 줄 타겟들 선정 (버튼, 네비게이션 링크, SNS 링크 등)
+    // 기존의 .custom-btn, .nav-menu a, .buy-btn 등에 적용
+    const targets = document.querySelectorAll('.custom-btn, .nav-menu a, .buy-btn, .flip-card');
+
+    targets.forEach(btn => {
+        btn.classList.add('magnetic-btn'); // CSS 클래스 추가
+
+        btn.addEventListener('mousemove', (e) => {
+            const pos = btn.getBoundingClientRect();
+            const x = e.clientX - pos.left - pos.width / 2;
+            const y = e.clientY - pos.top - pos.height / 2;
+
+            // 움직임 강도 (숫자가 클수록 더 멀리 딸려옴)
+            // 버튼은 0.3 정도, 큰 카드는 0.1 정도로 미세하게
+            const strength = btn.classList.contains('flip-card') ? 0.1 : 0.3;
+
+            btn.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            // 마우스 나가면 제자리로 복귀
+            btn.style.transform = 'translate(0px, 0px)';
+        });
+    });
+}
+
+// 실행 (페이지 로드 후)
+window.addEventListener('load', () => {
+    createGoldenDust();
+    initMagneticButtons();
 });
