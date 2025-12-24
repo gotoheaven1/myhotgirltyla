@@ -3,140 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYLA | Discography</title>
+    <title>TYLA | DISCOGRAPHY</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* [MUSIC 페이지 전용 3D 스타일] */
+        .music-container {
+            padding: 150px 50px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* 3D 카드 영역 */
+        .album-card {
+            background-color: transparent;
+            height: 400px;
+            perspective: 1000px; /* 3D 원근감 */
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .album-card:hover .card-inner {
+            transform: rotateY(180deg); /* 뒤집기 */
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 카드 앞면 (앨범 커버) */
+        .card-front {
+            background-color: #050505;
+        }
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .album-card:hover .card-front img {
+            filter: grayscale(0%);
+        }
+
+        /* 카드 뒷면 (트랙리스트) */
+        .card-back {
+            background-color: #111;
+            color: var(--text-white);
+            transform: rotateY(180deg);
+            padding: 20px;
+            border: 1px solid var(--chanel-gold);
+        }
+
+        .album-title {
+            font-family: var(--font-head);
+            color: var(--chanel-gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .track-list {
+            list-style: none;
+            font-size: 0.9rem;
+            line-height: 2;
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
     <div class="cursor-dot"></div>
     <div class="cursor-circle"></div>
     <div class="noise-texture"></div>
 
-    <main id="music-page">
-        <header>
-            <div class="header-inner">
-                <a href="index.html" class="logo hover-effect" style="text-decoration: none;">TYLA</a>
-                <nav class="nav-menu">
-                    <a href="index.html" class="hover-effect">HOME</a>
-                    <a href="about.html" class="hover-effect">ABOUT</a>
-                    <span class="active-page">MUSIC</span> <a href="awards.html" class="hover-effect">AWARDS</a>
-                </nav>
+    <header>
+        <div class="header-inner">
+            <span class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">TYLA</a></span>
+            <nav class="nav-menu">
+                <a href="about.html">ABOUT</a>
+                <a href="music.html" class="active-page">MUSIC</a>
+                <a href="awards.html">AWARDS</a>
+                <a href="index.html">HOME</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="music-container">
+        <div class="album-card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="images/album1.jpg" alt="TYLA Album">
+                </div>
+                <div class="card-back">
+                    <h3 class="album-title">TYLA (Debut)</h3>
+                    <ul class="track-list">
+                        <li>1. Intro (feat. Kelvin Momo)</li>
+                        <li>2. Safer</li>
+                        <li>3. Water</li>
+                        <li>4. Truth or Dare</li>
+                        <li>5. No.1 (feat. Tems)</li>
+                    </ul>
+                </div>
             </div>
-        </header>
+        </div>
 
-        <section class="disco-container">
-            <div class="section-head">
-                <h3>MUSICAL JOURNEY</h3>
-                <div class="gold-divider"></div>
-                <p class="sub-text">Hover cards to reveal details</p>
+        <div class="album-card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="images/album2.jpg" alt="Getting Late">
+                </div>
+                <div class="card-back">
+                    <h3 class="album-title">Getting Late</h3>
+                    <ul class="track-list">
+                        <li>1. Getting Late</li>
+                        <li>2. To Last</li>
+                        <li>3. Overdue</li>
+                        <li>4. Girl Next Door</li>
+                        <li>5. Been Thinking</li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
-            <div class="disco-grid">
-                
-                <div class="flip-card hover-effect">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="images/cover_tyla.jpg" alt="TYLA Album">
-                            <div class="card-overlay">TYLA (Debut Album)</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h4>TYLA</h4>
-                            <span class="release-date">2024. 03. 22</span>
-                            <div class="line"></div>
-                            <ul class="track-list">
-                                <li>Water</li>
-                                <li>Truth or Dare</li>
-                                <li>ART</li>
-                                <li>Safer</li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="album-card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="images/album3.jpg" alt="Water Remix">
                 </div>
-
-                <div class="flip-card hover-effect">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="images/cover_water.jpg" alt="Water Single">
-                            <div class="card-overlay">Water</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h4>Water</h4>
-                            <span class="release-date">2023. 07. 28</span>
-                            <div class="line"></div>
-                            <p class="desc">The Global Hit Song<br>Grammy Winner</p>
-                        </div>
-                    </div>
+                <div class="card-back">
+                    <h3 class="album-title">Water (Remix)</h3>
+                    <ul class="track-list">
+                        <li>1. Water (Remix) ft. Travis Scott</li>
+                        <li>2. Water (Marshmello Remix)</li>
+                        <li>3. Water (Original)</li>
+                    </ul>
                 </div>
-
-                <div class="flip-card hover-effect">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="images/cover_girl.jpg" alt="Girl Next Door">
-                            <div class="card-overlay">Girl Next Door</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h4>Girl Next Door</h4>
-                            <span class="release-date">2023. 05. 12</span>
-                            <div class="line"></div>
-                            <p class="desc">feat. Ayra Starr</p>
-                            <p class="desc">Amapiano & R&B Vibes</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card hover-effect">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="images/cover_late.jpg" alt="Getting Late">
-                            <div class="card-overlay">Getting Late</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h4>Getting Late</h4>
-                            <span class="release-date">2019. 10. 25</span>
-                            <div class="line"></div>
-                            <p class="desc">feat. Kooldrink</p>
-                            <p class="desc">The Beginning</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card hover-effect">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="images/cover_thinking.jpg" alt="Been Thinking">
-                            <div class="card-overlay">Been Thinking</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h4>Been Thinking</h4>
-                            <span class="release-date">2023. 01. 27</span>
-                            <div class="line"></div>
-                            <p class="desc">Upbeat Pop Anthem</p>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="flip-card hover-effect">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="images/cover_onecall.jpg" alt="One Call">
-                            <div class="card-overlay">One Call</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <h4>One Call</h4>
-                            <span class="release-date">2024. 11. 20</span>
-                            <div class="line"></div>
-                            <p class="desc">Deluxe Edition Track</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </section>
-
-        <footer>
-            <p>TYLA'S DISCOGRAPHY ARCHIVE</p>
-        </footer>
+        </div>
     </main>
+
+    <footer>
+        <p>© 2024 TYLA FAN PORTFOLIO</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
