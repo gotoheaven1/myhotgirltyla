@@ -179,446 +179,7 @@ header {
 footer { text-align: center; padding: 80px 0; color: #444; font-size: 0.8rem; border-top: 1px solid #111; }
 
 @media (max-width: 768px) {
-    .lp-turntable { flex-direction: column; }
-    .album-cover { width: 300px; height: 300px; }
-    .vinyl-disc { display: none; }
-    .photo-grid { grid-template-columns: repeat(2, 1fr); }
-    .award-row { flex-direction: column; text-align: center; gap: 10px; }
-}
-
-/* =========================================
-   [ABOUT PAGE STYLES] - 추가된 부분
-   ========================================= */
-
-.about-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    padding: 100px 5vw;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 80px;
-}
-
-/* 왼쪽 비주얼 영역 */
-.profile-visual {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.image-frame {
-    width: 400px;
-    height: 550px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 30px;
-    /* 흑백 처리했다가 호버 시 컬러로 */
-    filter: grayscale(100%);
-    transition: filter 0.5s ease, transform 0.5s ease;
-}
-
-.image-frame:hover {
-    filter: grayscale(0%);
-    transform: scale(1.02);
-}
-
-.image-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.frame-border {
-    position: absolute;
-    top: 15px; left: 15px; right: 15px; bottom: 15px;
-    border: 1px solid rgba(207, 170, 101, 0.5); /* 금색 테두리 */
-    pointer-events: none;
-}
-
-.signature {
-    font-family: 'Bodoni Moda', serif; /* 필기체 느낌 대신 고급 세리프로 대체 */
-    font-size: 1.5rem;
-    color: var(--chanel-gold);
-    letter-spacing: 5px;
-    font-style: italic;
-}
-
-/* 오른쪽 텍스트 영역 */
-.profile-info {
-    flex: 1;
-    text-align: left;
-}
-
-.intro-heading {
-    font-family: var(--font-head);
-    font-size: 4rem;
-    line-height: 1.1;
-    color: var(--text-white);
-    margin-bottom: 30px;
-}
-
-.gold-line-short {
-    width: 60px;
-    height: 2px;
-    background-color: var(--chanel-gold);
-    margin-bottom: 40px;
-}
-
-.bio-text {
-    font-size: 1rem;
-    color: #ccc;
-    line-height: 2;
-    margin-bottom: 20px;
-    word-break: keep-all; /* 한글 줄바꿈 최적화 */
-}
-
-.bio-text strong {
-    color: var(--chanel-gold);
-    font-weight: 500;
-}
-
-/* 프로필 상세 정보 (표 형태) */
-.profile-details {
-    margin-top: 50px;
-    border-top: 1px solid #333;
-    padding-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.detail-item {
-    display: flex;
-    flex-direction: column;
-}
-
-.detail-item .label {
-    font-family: var(--font-head);
-    font-size: 0.8rem;
-    color: var(--chanel-gold);
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-}
-
-.detail-item .value {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    color: #fff;
-}
-
-/* 모바일 반응형 (About 페이지) */
-@media (max-width: 900px) {
-    .about-container {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 50px;
-    }
-
-    .image-frame {
-        width: 300px;
-        height: 400px;
-    }
-
-    .profile-info {
-        text-align: center;
-    }
-    
-    .gold-line-short {
-        margin: 0 auto 40px; /* 가운데 정렬 */
-    }
-
-    .profile-details {
-        text-align: left; /* 상세 정보는 왼쪽 정렬 유지 */
-    }
-
-}
-/* =========================================
-   [MUSIC PAGE - DISCOGRAPHY STYLES]
-   ========================================= */
-
-.disco-container {
-    padding: 100px 5vw;
-    max-width: 1400px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.sub-text {
-    font-size: 0.9rem; color: #666; letter-spacing: 2px; margin-top: 15px;
-}
-
-/* 그리드 레이아웃 */
-.disco-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 60px;
-}
-
-/* 3D 플립 카드 컨테이너 */
-.flip-card {
-    background-color: transparent;
-    aspect-ratio: 1/1; /* 정사각형 비율 유지 */
-    perspective: 1000px; /* 3D 공간감 */
-}
-
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 쫀득한 회전 효과 */
-    transform-style: preserve-3d;
-}
-
-/* 호버 시 회전 */
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-/* 앞면 & 뒷면 공통 */
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden; /* 뒷면일 때 숨김 */
-    border: 1px solid #333;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 카드 앞면 (이미지) */
-.flip-card-front {
-    background-color: #000;
-}
-
-.flip-card-front img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.8);
-    transition: 0.5s;
-}
-
-.card-overlay {
-    position: absolute;
-    bottom: 20px; left: 0; width: 100%;
-    color: var(--text-white);
-    font-family: var(--font-head);
-    font-size: 1.2rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-    opacity: 1;
-}
-
-/* 카드 뒷면 (정보) */
-.flip-card-back {
-    background-color: #111;
-    color: var(--text-white);
-    transform: rotateY(180deg); /* 미리 뒤집어 놓음 */
-    border: 1px solid var(--chanel-gold);
-    box-shadow: 0 0 20px rgba(207, 170, 101, 0.2);
-    padding: 20px;
-}
-
-.flip-card-back h4 {
-    font-family: var(--font-head);
-    font-size: 1.8rem;
-    color: var(--chanel-gold);
-    margin-bottom: 5px;
-}
-
-.flip-card-back .release-date {
-    font-size: 0.8rem; color: #888; letter-spacing: 2px;
-}
-
-.flip-card-back .line {
-    width: 30px; height: 1px; background: #444; margin: 15px auto;
-}
-
-.flip-card-back .track-list {
-    list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8; color: #ccc;
-}
-.flip-card-back .desc {
-    font-size: 0.9rem; color: #bbb;
-}
-
-/* 반응형 */
-@media (max-width: 900px) {
-    .disco-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-    .disco-grid { grid-template-columns: 1fr; }
-    .flip-card { max-width: 350px; margin: 0 auto; }
-}
-/* [인트로 섹션 (캔버스)] */
-#intro-canvas-layer {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    background: #000; z-index: 5000;
-    transition: opacity 1s ease, visibility 1s ease;
-    display: flex; /* 가사와 제목을 중앙 정렬하기 위해 추가 */
-    justify-content: center;
-    align-items: center;
-}
-#intro-canvas-layer.fade-out {
-    opacity: 0; visibility: hidden; pointer-events: none;
-}
-canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; } /* 캔버스를 뒤로 보냄 */
-
-.intro-text-box {
-    position: relative; /* 캔버스 위에 위치 */
-    text-align: center;
-    pointer-events: none;
-    z-index: 2; /* 캔버스 위로 오도록 설정 */
-    display: flex; /* 내부 요소들을 세로로 정렬 */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* 가사가 길어도 중앙에 오도록 */
-    max-width: 800px; /* 가사 최대 너비 제한 */
-}
-.intro-title {
-    font-family: var(--font-head); font-size: 5rem; color: var(--chanel-gold);
-    letter-spacing: 0.2em; margin-bottom: 20px;
-    text-shadow: 0 0 15px rgba(207, 170, 101, 0.4); /* 제목도 약간 빛나게 */
-}
-
-/* 새로 추가되는 인트로 가사 스타일 */
-.intro-quote-box {
-    min-height: 120px; /* 가사 길이가 달라져도 높이 유지 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
-    padding: 0 20px; /* 좌우 여백 */
-}
-#intro-quote-text {
-    font-family: var(--font-head); /* 우아한 폰트 */
-    font-size: 1.8rem; /* 적당한 크기 */
-    color: var(--text-white);
-    line-height: 1.5;
-    letter-spacing: 1px;
-    opacity: 0; /* 초기에는 숨겨두기 */
-    animation: fadeInOutIntroQuote 10s ease-in-out infinite; /* 페이드인아웃 애니메이션 */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* 약간의 그림자 */
-    max-width: 700px; /* 너무 길게 늘어지지 않게 */
-}
-
-/* 인트로 가사 페이드인/아웃 애니메이션 */
-@keyframes fadeInOutIntroQuote {
-    0% { opacity: 0; transform: translateY(10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    40% { opacity: 1; transform: translateY(0); }
-    50% { opacity: 0; transform: translateY(-10px); }
-    100% { opacity: 0; transform: translateY(10px); }
-}
-
-.intro-guide {
-    font-size: 0.9rem; color: #666; letter-spacing: 2px; line-height: 1.8;
-}
-
-@media (max-width: 768px) {
-    .intro-title { font-size: 3rem; }
-    #intro-quote-text { font-size: 1.2rem; min-height: 90px; }
-    .intro-guide { font-size: 0.7rem; }
-}
-/* =========================================
-   [THE SAND OF TIME STYLES]
-   ========================================= */
-.sand-time-section {
-    padding: 80px 0;
-    border-top: 1px solid #1a1a1a;
-    background: linear-gradient(to bottom, #0a0a0a, #050505);
-    text-align: center;
-}
-
-.sand-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-/* 모래시계 아이콘 & 애니메이션 */
-.hourglass-icon svg {
-    width: 50px;
-    height: 50px;
-    color: var(--chanel-gold);
-    animation: rotateHourglass 6s ease-in-out infinite; /* 6초마다 뒤집힘 */
-}
-
-@keyframes rotateHourglass {
-    0% { transform: rotate(0deg); }
-    45% { transform: rotate(0deg); }
-    50% { transform: rotate(180deg); } /* 휙 돌리기 */
-    95% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.time-title {
-    font-family: var(--font-head);
-    font-size: 2rem;
-    color: var(--chanel-gold);
-    letter-spacing: 3px;
-    margin-bottom: 5px;
-}
-
-.time-subtitle {
-    font-size: 0.8rem;
-    color: #666;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
-
-/* 카운트다운 타이머 레이아웃 */
-#countdown-timer {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.time-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.time-unit span {
-    font-family: var(--font-head);
-    font-size: 3rem;
-    color: var(--text-white);
-    line-height: 1;
-    font-variant-numeric: tabular-nums; /* 숫자 간격 일정하게 */
-}
-
-.time-unit .label {
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    color: var(--chanel-gold);
-    margin-top: 10px;
-    letter-spacing: 2px;
-}
-
-.separator {
-    font-family: var(--font-head);
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px; /* 숫자랑 높이 맞추기 */
-}
-
-/* 모바일 반응형 */
-@media (max-width: 600px) {
-    #countdown-timer { gap: 10px; }
-    .time-unit span { font-size: 2rem; }
-    .separator { font-size: 1.5rem; }
-}
-/* =========================================
+    .lp-turntable { flex-direction: column; }/* =========================================
    [WATER RIPPLE EFFECT]
    ========================================= */
 .ripple {
@@ -638,4 +199,43 @@ canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; } /* �
         transform: scale(4);
         opacity: 0;
     }
+} 
+/* =========================================
+   [FEATURE 2: GOLDEN DUST & MAGNETIC EFFECT]
+   ========================================= */
+
+/* 1. 금가루(Dust) 스타일 */
+.gold-dust {
+    position: fixed; /* 스크롤 내려도 화면에 떠있음 */
+    top: 0; left: 0;
+    width: 2px; height: 2px;
+    background: var(--chanel-gold);
+    border-radius: 50%;
+    pointer-events: none; /* 클릭 방해 안 함 */
+    z-index: 50; /* 배경보단 위에, 컨텐츠보단 아래에 */
+    box-shadow: 0 0 4px var(--chanel-gold); /* 은은한 빛 */
+    opacity: 0;
+    animation: riseDust linear infinite;
+}
+
+@keyframes riseDust {
+    0% {
+        transform: translateY(110vh) scale(0);
+        opacity: 0;
+    }
+    20% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    80% { opacity: 0.5; }
+    100% {
+        transform: translateY(-10vh) scale(1.5); /* 위로 올라가며 사라짐 */
+        opacity: 0;
+    }
+}
+
+/* 2. 자석 버튼(Magnetic) 전환 효과 */
+.magnetic-btn {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 부드러운 움직임 */
+    will-change: transform; /* 성능 최적화 */
+}
 
