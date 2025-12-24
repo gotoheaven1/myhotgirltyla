@@ -6,6 +6,87 @@
     <title>TYLA | AWARDS</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* [AWARDS 페이지 전용 스타일] */
+        .awards-container {
+            padding: 150px 50px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        /* 리스트 컨테이너 */
+        .awards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 개별 리스트 아이템 */
+        .award-row {
+            display: grid;
+            grid-template-columns: 100px 200px 1fr;
+            align-items: center;
+            padding: 25px;
+            border-bottom: 1px solid #222;
+            transition: all 0.4s ease; /* 부드러운 전환 */
+            color: #888;
+        }
+
+        .award-row .year {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            color: var(--chanel-gold);
+        }
+
+        .award-row .org {
+            font-weight: bold;
+            color: #ccc;
+        }
+
+        .award-row .detail {
+            font-weight: 300;
+        }
+
+        /* [ 스포트라이트 효과 핵심 코드 ] */
+        
+        /* 1. 리스트 전체에 마우스를 올렸을 때 -> 모든 항목을 흐리게 만듦 */
+        .awards-list:hover .award-row {
+            opacity: 0.2;
+            filter: blur(2px);
+            transform: scale(0.98);
+        }
+
+        /* 2. 그 중에서 내가 마우스를 올린 항목만 -> 선명하고 크게 만듦 */
+        .awards-list .award-row:hover {
+            opacity: 1;
+            filter: blur(0);
+            transform: scale(1.02);
+            background: rgba(207, 170, 101, 0.05); /* 아주 연한 골드 배경 */
+            border-bottom-color: var(--chanel-gold);
+            color: var(--text-white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 10;
+            border-radius: 4px;
+        }
+        
+        /* 호버 시 텍스트 색상 강조 */
+        .awards-list .award-row:hover .org {
+            color: var(--chanel-gold);
+        }
+
+        @media (max-width: 768px) {
+            .award-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="cursor-dot"></div>
