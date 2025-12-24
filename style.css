@@ -638,41 +638,4 @@ canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; } /* �
         transform: scale(4);
         opacity: 0;
     }
-/* =========================================
-   [FEATURE 2: GOLDEN DUST & MAGNETIC EFFECT]
-   ========================================= */
 
-/* 1. 금가루(Dust) 스타일 */
-.gold-dust {
-    position: fixed; /* 스크롤 내려도 화면에 떠있음 */
-    top: 0; left: 0;
-    width: 2px; height: 2px;
-    background: var(--chanel-gold);
-    border-radius: 50%;
-    pointer-events: none; /* 클릭 방해 안 함 */
-    z-index: 50; /* 배경보단 위에, 컨텐츠보단 아래에 */
-    box-shadow: 0 0 4px var(--chanel-gold); /* 은은한 빛 */
-    opacity: 0;
-    animation: riseDust linear infinite;
-}
-
-@keyframes riseDust {
-    0% {
-        transform: translateY(110vh) scale(0);
-        opacity: 0;
-    }
-    20% { opacity: 0.5; }
-    50% { opacity: 0.8; }
-    80% { opacity: 0.5; }
-    100% {
-        transform: translateY(-10vh) scale(1.5); /* 위로 올라가며 사라짐 */
-        opacity: 0;
-    }
-}
-
-/* 2. 자석 버튼(Magnetic) 전환 효과 */
-.magnetic-btn {
-    display: inline-block;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 부드러운 움직임 */
-    will-change: transform; /* 성능 최적화 */
-}
