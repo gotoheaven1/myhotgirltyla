@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYLA | The Golden Muse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <section id="intro-canvas-layer">
+        <canvas id="bubbleCanvas"></canvas>
+        <div class="intro-text-box">
+            <h1 class="intro-title">TYLA</h1>
+            
+            <div class="intro-quote-box">
+                <p id="intro-quote-text"></p>
+            </div>
+
+            <p class="intro-guide">Click bubbles to pop<br>Press [SPACE] to enter</p>
+        </div>
+    </section>
+    <main id="main-content" class="hidden">
+        <div class="noise-texture"></div>
+
+        <header>
+            <div class="header-inner">
+                <span class="logo">TYLA</span>
+                <nav class="nav-menu">
+                    <a href="about.html" class="hover-effect">ABOUT</a>
+                    <a href="music.html" class="hover-effect">MUSIC</a>
+                    <a href="awards.html" class="hover-effect">AWARDS</a>
+                    <a href="https://www.youtube.com/@Tylaofficial" target="_blank" class="hover-effect">YOUTUBE</a>
+                    <a href="https://x.com/Tyllaaaaaaa" target="_blank" class="hover-effect">TWITTER</a>
+                    <a href="https://www.instagram.com/tyla" target="_blank" class="hover-effect">INSTAGRAM</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="player-section">
+            <div class="lp-turntable">
+                <div class="album-cover">
+                    <div id="youtube-player"></div>
+                    <div class="gold-border"></div>
+                </div>
+                
+                <div class="vinyl-disc">
+                    <div class="vinyl-groove"></div>
+                    <div class="vinyl-label">TYLA</div>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="track-info">
+                    <span class="status-text">NOW PLAYING</span>
+                    <h2 id="track-title" class="hover-effect">Loading...</h2>
+                </div>
+                <div class="btn-wrapper">
+                    <button id="play-pause-btn" class="custom-btn hover-effect">재생</button>
+                    <button id="next-track-btn" class="custom-btn hover-effect">다음 곡 (Random)</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="section-head">
+                <h3>VISUAL ARCHIVE</h3>
+                <div class="gold-divider"></div>
+            </div>
+            
+            <div class="photo-grid">
+                <div class="photo-item hover-effect"><img src="images/photo1.jpg" alt="Tyla 1"></div>
+                <div class="photo-item hover-effect"><img src="images/photo2.jpg" alt="Tyla 2"></div>
+                <div class="photo-item hover-effect"><img src="images/photo3.jpg" alt="Tyla 3"></div>
+                <div class="photo-item hover-effect"><img src="images/photo4.jpg" alt="Tyla 4"></div>
+                <div class="photo-item hover-effect"><img src="images/photo5.jpg" alt="Tyla 5"></div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <div class="quote-container">
+                <div class="quote-icon">“</div>
+                
+                <h2 id="quote-text" class="fade-in">Make me sweat, make me hotter</h2>
+                <p id="quote-source" class="fade-in">- Water -</p>
+                
+                <div class="quote-icon right">”</div>
+                
+                <button id="shuffle-btn" class="custom-btn hover-effect">SHUFFLE MOOD</button>
+            </div>
+        </section>
+
+        <section class="sand-time-section">
+            <div class="sand-container">
+                <div class="hourglass-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 2L18 2M6 22L18 22M12 12L7 2H17L12 12ZM12 12L7 22H17L12 12Z" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <div class="time-content">
+                    <h3 class="time-title">THE SAND OF TIME</h3>
+                    <p class="time-subtitle">Countdown to Tyla's Birthday (Jan 30)</p>
+                    
+                    <div id="countdown-timer">
+                        <div class="time-unit">
+                            <span id="days">00</span>
+                            <span class="label">DAYS</span>
+                        </div>
+                        <div class="separator">:</div>
+                        <div class="time-unit">
+                            <span id="hours">00</span>
+                            <span class="label">HRS</span>
+                        </div>
+                        <div class="separator">:</div>
+                        <div class="time-unit">
+                            <span id="minutes">00</span>
+                            <span class="label">MIN</span>
+                        </div>
+                        <div class="separator">:</div>
+                        <div class="time-unit">
+                            <span id="seconds">00</span>
+                            <span class="label">SEC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>DESIGNED FOR TYLA. INSPIRED BY CHANEL.</p>
+            <p class="copyright">© 2024 FAN PORTFOLIO</p>
+        </footer>
+      
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
