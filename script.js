@@ -216,3 +216,16 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000);
 window.addEventListener('load', updateCountdown);
+const topBtn = document.getElementById('scrollToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        topBtn.style.display = 'block';
+    } else {
+        topBtn.style.display = 'none';
+    }
+});
+
+topBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
