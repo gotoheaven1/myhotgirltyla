@@ -8,15 +8,21 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* [ABOUT 페이지 전용 스타일] */
-        .about-wrapper {
+        
+        /* 메인 컨테이너 설정 (전체 레이아웃 잡기) */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 50px;
+        }
+
+        /* 1. 상단 히어로 섹션 (이미지 + 텍스트) */
+        .about-hero {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
-            padding: 100px 50px;
-            max-width: 1400px;
-            margin: 0 auto;
             gap: 60px;
+            margin-bottom: 120px; /* 타임라인과의 간격 */
         }
 
         .about-image {
@@ -59,49 +65,231 @@
             word-break: keep-all;
         }
 
-        /* 서명 스타일 컨테이너 */
+        /* 서명 스타일 */
         .signature {
             font-family: 'Bodoni Moda', serif;
             font-size: 2rem;
             color: var(--chanel-gold);
             font-style: italic;
-            text-align: right; /* 우측 정렬 유지 */
+            text-align: right;
+            margin-bottom: 40px;
         }
 
-        /* [서명 애니메이션 효과] */
+        /* 서명 애니메이션 */
         .typing-effect {
-            display: inline-block; /* 너비 애니메이션을 위해 필수 */
-            overflow: hidden; /* 글자가 써지기 전엔 숨김 */
-            white-space: nowrap; /* 줄바꿈 방지 */
-            border-right: 2px solid var(--chanel-gold); /* 커서(펜촉) 효과 */
-            width: 0; /* 처음엔 안 보임 */
-            
-            /* 애니메이션 실행: typing(글자 써짐) + blink(커서 깜빡임) */
-            animation: 
-                typing 3.5s steps(40, end) forwards, 
-                blink 0.75s step-end infinite;
-            
-            animation-delay: 0.5s; /* 0.5초 뒤 시작 */
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--chanel-gold);
+            width: 0;
+            animation: typing 3.5s steps(40, end) forwards, blink 0.75s step-end infinite;
+            animation-delay: 0.5s;
             vertical-align: bottom;
         }
 
-        /* 글자가 써지는 애니메이션 */
         @keyframes typing {
             0% { width: 0; }
-            90% { width: 100%; border-right-color: var(--chanel-gold); } /* 다 써갈 때쯤 커서 유지 */
-            100% { width: 100%; border-right-color: transparent; } /* 다 쓰면 커서 사라짐 */
+            90% { width: 100%; border-right-color: var(--chanel-gold); }
+            100% { width: 100%; border-right-color: transparent; }
         }
 
-        /* 커서 깜빡임 애니메이션 */
         @keyframes blink {
             from, to { border-color: transparent; }
             50% { border-color: var(--chanel-gold); }
         }
 
+        /* Fact Grid 스타일 */
+        .fact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+
+        .fact-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fact-item .label {
+            font-size: 0.8rem;
+            color: #666;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .fact-item .value {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            color: var(--chanel-gold);
+        }
+
+        /* -------------------------------------- */
+        /* [새로 추가된 섹션: Timeline & DNA] */
+        /* -------------------------------------- */
+
+        /* 타임라인 전체 컨테이너 */
+        .timeline-section {
+            border-top: 1px solid #222;
+            padding-top: 80px;
+            margin-bottom: 100px;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            color: var(--chanel-gold);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 30px;
+        }
+
+        /* 수직 선 (금색 실) */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--chanel-gold), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 40px;
+        }
+
+        /* 타임라인 점 (Dot) */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px; /* 선 중앙 정렬 */
+            top: 5px;
+            width: 11px;
+            height: 11px;
+            background: #000;
+            border: 2px solid var(--chanel-gold);
+            border-radius: 50%;
+            transition: 0.3s;
+            z-index: 1;
+        }
+
+        .timeline-item:hover::before {
+            background: var(--chanel-gold);
+            box-shadow: 0 0 15px var(--chanel-gold);
+        }
+
+        .timeline-year {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.2rem;
+            color: var(--chanel-gold);
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+
+        .timeline-content p {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Musical DNA 스타일 */
+        .dna-section {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #222;
+        }
+
+        .dna-title {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .dna-values {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            color: var(--chanel-gold);
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+        }
+
+        .dna-values span {
+            transition: 0.3s;
+        }
+        
+        .dna-values span:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px var(--chanel-gold);
+        }
+
+        /* Marquee Section */
+        .marquee-section {
+            width: 100%;
+            overflow: hidden;
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 20px 0;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marquee-content span {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: #333;
+            margin: 0 30px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .marquee-section:hover .marquee-content span {
+            color: #555;
+        }
+
+        .marquee-content .star {
+            color: var(--chanel-gold);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         @media (max-width: 768px) {
-            .about-wrapper {
+            .about-hero {
                 flex-direction: column;
-                padding: 100px 20px;
+                gap: 40px;
+                margin-bottom: 80px;
             }
             .about-image {
                 width: 100%;
@@ -109,6 +297,16 @@
             }
             .about-title {
                 font-size: 3rem;
+            }
+            .fact-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-content {
+                padding: 100px 20px;
+            }
+            .dna-values {
+                font-size: 1.2rem;
+                gap: 15px;
             }
         }
     </style>
@@ -130,32 +328,119 @@
         </div>
     </header>
 
-    <main class="about-wrapper">
-        <div class="about-image">
-            <img src="images/profile.jpg" alt="Tyla Profile">
-        </div>
+    <main class="main-content">
         
-        <div class="about-text">
-            <h1 class="about-title">THE<br>GOLDEN<br>MUSE</h1>
-            <p class="about-desc">
-                남아프리카 요하네스버그에서 태어난 타일라(Tyla)는 
-                <span style="color: var(--chanel-gold); font-weight: bold;">팝</span>과 
-                <span style="color: var(--chanel-gold); font-weight: bold;">아마피아노(Amapiano)</span>의 
-                경계를 허무는 글로벌 아티스트입니다.<br><br>
-
-                그녀의 음악은 단순한 청각적 경험을 넘어, 아프리카의 리듬과 현대적인 팝 감성을 융합하여 새로운 장르적 쾌감을 선사합니다. 데뷔와 동시에 전 세계를 매료시킨 "Water"는 그녀가 단순한 신인이 아니라, 이 시대의 새로운 아이콘임을 증명했습니다.
-            </p>
+        <div class="about-hero">
+            <div class="about-image">
+                <img src="images/profile.jpg" alt="Tyla Profile">
+            </div>
             
-            <p class="signature">
-                <span class="typing-effect">Tyla Laura Seethal</span>
-            </p>
+            <div class="about-text">
+                <h1 class="about-title">THE<br>GOLDEN<br>MUSE</h1>
+                <p class="about-desc">
+                    남아프리카 요하네스버그에서 태어난 타일라(Tyla)는 
+                    <span style="color: var(--chanel-gold); font-weight: bold;">팝</span>과 
+                    <span style="color: var(--chanel-gold); font-weight: bold;">아마피아노(Amapiano)</span>의 
+                    경계를 허무는 글로벌 아티스트입니다.<br><br>
+                    그녀의 음악은 단순한 청각적 경험을 넘어, 아프리카의 리듬과 현대적인 팝 감성을 융합하여 새로운 장르적 쾌감을 선사합니다. 데뷔와 동시에 전 세계를 매료시킨 "Water"는 그녀가 단순한 신인이 아니라, 이 시대의 새로운 아이콘임을 증명했습니다.
+                </p>
+                
+                <p class="signature">
+                    <span class="typing-effect">Tyla Laura Seethal</span>
+                </p>
+
+                <div class="fact-grid">
+                    <div class="fact-item">
+                        <span class="label">BORN</span>
+                        <span class="value">Jan 30, 2002</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="label">HOMETOWN</span>
+                        <span class="value">Johannesburg, SA</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="label">FANDOM</span>
+                        <span class="value">Tygers </span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="label">ZODIAC</span>
+                        <span class="value">Aquarius</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="dna-section">
+            <p class="dna-title">MUSICAL DNA</p>
+            <div class="dna-values">
+                <span>POP</span>
+                <span style="color: #444; font-size: 1rem;">+</span>
+                <span>R&B</span>
+                <span style="color: #444; font-size: 1rem;">+</span>
+                <span>AMAPIANO</span>
+            </div>
+        </div>
+
+        <div class="timeline-section">
+            <h2 class="section-title">THE JOURNEY</h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-content">
+                        <h3>The Beginning</h3>
+                        <p>데뷔 싱글 'Getting Late'를 발매하며 요하네스버그에서 음악적 커리어를 시작했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2021</div>
+                    <div class="timeline-content">
+                        <h3>Global Stage</h3>
+                        <p>Epic Records와 계약을 체결하며 세계 무대로 도약할 발판을 마련했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-content">
+                        <h3>The Viral Hit</h3>
+                        <p>"Water"가 틱톡과 빌보드 차트를 강타하며 글로벌 센세이션을 일으켰습니다.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year" style="color:var(--chanel-gold); text-shadow:0 0 10px rgba(207,170,101,0.5);">2024</div>
+                    <div class="timeline-content">
+                        <h3>Grammy Winner</h3>
+                        <p>제66회 그래미 어워드 'Best African Music Performance' 수상으로 역사를 썼습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
+
+    <div class="marquee-section">
+        <div class="marquee-content">
+            <span>TYLA</span> <span class="star">✦</span>
+            <span>AMAPIANO PRINCESS</span> <span class="star">✦</span>
+            <span>FROM JOBURG TO THE WORLD</span> <span class="star">✦</span>
+            <span>GRAMMY WINNER</span> <span class="star">✦</span>
+            <span>TYLA</span> <span class="star">✦</span>
+            <span>AMAPIANO PRINCESS</span> <span class="star">✦</span>
+            <span>FROM JOBURG TO THE WORLD</span> <span class="star">✦</span>
+            <span>GRAMMY WINNER</span> <span class="star">✦</span>
+        </div>
+    </div>
 
     <footer>
         <p>© 2024 TYLA FAN PORTFOLIO</p>
     </footer>
 
+    <script src="script.js"></script>
+</body>
+</html>
     <script src="script.js"></script>
 </body>
 </html>
